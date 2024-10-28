@@ -1,3 +1,17 @@
+<!-- partial view analytics - new -->
+
+
+<?php 
+
+    // Check if the request is an AJAX request
+    if (empty($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') {
+        // Redirect to forbidden page if accessed directly
+        header("Location: forbidden.php");
+        exit();
+    }
+
+?>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">

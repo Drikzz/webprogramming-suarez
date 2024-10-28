@@ -7,7 +7,7 @@
         }
     }else{
         header('location: ../account/login.php');
-    }
+    } 
 
     require_once '../includes/head.php';
 ?>

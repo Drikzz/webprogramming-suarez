@@ -81,8 +81,33 @@ class Account{
 
         return $data;
     }
+
+    //fetch all accounts - new
+    function fetchAll(){
+        $sql = "SELECT CONCAT(first_name, ', ', last_name) as name, username, role FROM account;";
+        $query = $this->db->connect()->prepare($sql);
+
+        $data = null;
+        if($query->execute()){
+            $data = $query->fetchAll();
+        }
+
+        return $data;
+    }
+
+    function fetchRoles() {
+        $sql = "SELECT role FROM account;";
+        $query = $this->db->connect()->prepare($sql);
+
+        $data = null;
+        if($query->execute()){
+            $data = $query->fetchAll();
+        }
+
+        return $data;
+    }
 }
 
 // $obj = new Account();
-
-// $obj->add();
+// $result = $obj->fetchRoles();
+// var_dump($result);
