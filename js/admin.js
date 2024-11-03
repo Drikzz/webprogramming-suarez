@@ -130,14 +130,16 @@ $(document).ready(function(){
     }
 
     function saveProduct(){
+        let form = new FormData($('#form-add-product')[0])
         $.ajax({
             type: 'POST',
-            url: '../products/add-product.php',  // Make sure this points to your PHP handler
-            data: $('form').serialize(),         // Serialize the form data
-            dataType: 'json',                    // Expect a JSON response
+            url: '../products/add-product.php',
+            data: form,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
             success: function(response) {
                 if (response.status === 'error') {
-                    // Display validation errors for each field
                     if (response.codeErr) {
                         $('#code').addClass('is-invalid');
                         $('#code').next('.invalid-feedback').text(response.codeErr).show();
@@ -162,11 +164,15 @@ $(document).ready(function(){
                     }else{
                         $('#price').removeClass('is-invalid');
                     }
+                    if (response.imageErr) {
+                        $('#product_image').addClass('is-invalid');
+                        $('#product_image').next('.invalid-feedback').text(response.imageErr).show();
+                    }else{
+                        $('#product_image').removeClass('is-invalid');
+                    }
                 } else if (response.status === 'success') {
-                    // Hide the modal and reset the form on success
-                    $('#staticBackdrop').modal('hide');
-                    $('form')[0].reset();  // Reset the form
-                    // Optionally, redirect to the product listing page or display a success message
+                    $('#modal-add-product').modal('hide');
+                    $('#form-add-product')[0].reset();
                     viewProducts()
                 }
             }
