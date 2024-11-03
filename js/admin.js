@@ -117,7 +117,7 @@ $(document).ready(function(){
             dataType: 'html',
             success: function(view){
                 $('.modal-container').html(view)
-                $('#staticBackdrop').modal('show')
+                $('#modal-add-product').modal('show')
 
                 fetchCategories()
 
